@@ -1,0 +1,30 @@
+venv/
+.idea/
+reports/
+__pycache__/
+*.pyc
+.env
+
+# pytest
+.pytest_cache/
+
+# Selenium/webdriver artifacts (if you add screenshot-on-failure later)
+screenshots/
+
+# Allure (only relevant if you do the stretch-goal Allure reporting)
+allure-results/
+allure-report/
+
+# Logs
+*.log
+
+# OS-specific junk
+.DS_Store
+Thumbs.db
+
+# Stray PyCharm project files that sometimes land outside .idea/
+*.iml
+
+# Editor swap/backup files
+*.swp
+*~

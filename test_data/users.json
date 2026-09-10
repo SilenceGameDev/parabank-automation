@@ -1,0 +1,14 @@
+{
+  "shared_demo_user": {
+    "username": "john",
+    "password": "demo"
+  },
+  "invalid_password": {
+    "username": "john",
+    "password": "wrongpassword"
+  },
+  "empty_credentials": {
+    "username": "",
+    "password": ""
+  }
+}
