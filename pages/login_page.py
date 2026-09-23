@@ -1,6 +1,5 @@
 from selenium.webdriver.common.by import By
 from .base_page import BasePage
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 class LoginPage(BasePage):
@@ -8,7 +7,8 @@ class LoginPage(BasePage):
     USERNAME = (By.NAME, "username")
     PASSWORD = (By.NAME, "password")
     LOGIN_BTN = (By.CSS_SELECTOR, "input.button")
-    ERROR = (By.CSS_SELECTOR, ".error")
+    ERROR = (By.CSS_SELECTOR, ".title")
+    REGISTER_LINK = (By.LINK_TEXT, "Register")
 
     def load(self):
         self.driver.get(self.URL)
@@ -25,3 +25,12 @@ class LoginPage(BasePage):
         self.type(self.PASSWORD, password)
         self.click(self.LOGIN_BTN)
         self.wait.until(EC.visibility_of_element_located(self.ERROR))
+
+    def register(self, username, password):
+        self.click(self.REGISTER_LINK)
+        self.type(self.USERNAME, username)
+        self.type(self.USERNAME, username)
+        self.type(self.PASSWORD, password)
+
+    def get_error_text(self):
+        return self.find(self.ERROR).text.lower()

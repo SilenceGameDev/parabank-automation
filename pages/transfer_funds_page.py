@@ -2,24 +2,18 @@ from selenium.webdriver.common.by import By
 from .base_page import BasePage
 
 class TransferFundsPage(BasePage):
-    URL = "https://parabank.parasoft.com/parabank/index.htm"
-    USERNAME = (By.NAME, "username")
-    PASSWORD = (By.NAME, "password")
-    TRANSFERFUNDS_BTN = (By.CSS_SELECTOR, "input.button")
-    ERROR = (By.CSS_SELECTOR, ".error")
+    TRANSFER_COMPLETE = (By.XPATH, '//*[@id="showResult"]/h1')
+    AMOUNT_INPUT_FIELD = (By.ID, "amount")
+    FROM_ACCOUNT = (By.ID, "fromAccountId")
+    TO_ACCOUNT = (By.ID, "toAccountId")
+    TRANSFER_BUTTON = (By.CSS_SELECTOR, "input.button")
 
-    def load(self):
-        self.driver.get(self.URL)
+    def transfer_funds(self, amount_to_transfer:float, from_index:int=0, to_index:int=1):
+        self.type(self.AMOUNT_INPUT_FIELD, str(amount_to_transfer))
+        self.select_by_index(self.FROM_ACCOUNT, from_index)
+        self.select_by_index(self.TO_ACCOUNT, to_index)
+        self.click(self.TRANSFER_BUTTON)
 
-    def login(self, username, password):
-        self.type(self.USERNAME, username)
-        self.type(self.PASSWORD, password)
-        self.click(self.LOGIN_BTN)
+    def get_confirmation_text(self):
+        return self.find(self.TRANSFER_COMPLETE).text
 
-# login -- create login page class and login
-# click transfer funds -- create accounts_overview page class and click transfer funds
-# find amount text input field --
-# input 7
-# find From account dropdown and select 12345
-# find To account dropdown and select 12456
-# find Transfer button and click it

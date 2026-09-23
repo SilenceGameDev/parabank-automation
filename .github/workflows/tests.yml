@@ -1,0 +1,19 @@
+name: QA Automation Suite
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      PARABANK_TEST_USERNAME: ${{ secrets.PARABANK_TEST_USERNAME }}
+      PARABANK_TEST_PASSWORD: ${{ secrets.PARABANK_TEST_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+      - run: pip install -r requirements.txt
+      - run: pytest --html=reports/report.html --self-contained-html
+      - uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: reports/report.html
