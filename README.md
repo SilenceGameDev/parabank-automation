@@ -60,6 +60,13 @@ All planned test cases (or their documented gaps) reflect actual, verified ParaB
 - **#7** — Find Transactions displays the literal text "NaN" instead of a
   proper "no results" message when a date-range or amount search matches
   nothing.
+- **#8** — Critical: authentication did not validate credentials for a
+  period of time; any username/password combination granted access to a
+  single shared account ("John Smith") rather than the submitted identity's
+  own account. First observed 10/2/2026. Existing login tests only verified
+  successful redirect, not account identity, and would not have caught
+  this on their own; tests have since been strengthened to verify the
+  logged-in account's identity post-login.
 
 ## Scope Notes
 

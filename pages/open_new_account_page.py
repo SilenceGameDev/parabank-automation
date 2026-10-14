@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 from .base_page import BasePage
 
 class OpenNewAccountPage(BasePage):
-    ACCOUNT_OPENED_TEXT = (By.XPATH, '//*[@id="openAccountResult"]/h1')
+    ACCOUNT_OPENED_TEXT = (By.CSS_SELECTOR, 'div#openAccountResult h1.title')
     ACCOUNT_TYPE = (By.ID, "type")
     FROM_ACCOUNT = (By.ID, "fromAccountId")
     OPEN_NEW_ACCOUNT_BUTTON = (By.CSS_SELECTOR, "input.button")

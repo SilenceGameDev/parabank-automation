@@ -15,7 +15,7 @@ class PayeeInformation:
     verify_account_number: str = "6789"
 
 class BillPayPage(BasePage):
-    BILL_PAYMENT_COMPLETE = (By.XPATH, '//*[@id="billpayResult"]/h1')
+    BILL_PAYMENT_COMPLETE = (By.CSS_SELECTOR, 'div#billpayResult h1.title')
     PAYEE_NAME = (By.NAME, "payee.name")
     PAYEE_ADDRESS_STREET = (By.NAME, "payee.address.street")
     PAYEE_ADDRESS_CITY = (By.NAME, "payee.address.city")

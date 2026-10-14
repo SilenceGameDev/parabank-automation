@@ -1,7 +1,5 @@
 from pages.open_new_account_page import OpenNewAccountPage
 import pytest
-from pages.transfer_funds_page import TransferFundsPage
-
 
 def test_open_new_checking_account(driver, logged_in_accounts_page):
     logged_in_accounts_page.load_open_new_account_page()

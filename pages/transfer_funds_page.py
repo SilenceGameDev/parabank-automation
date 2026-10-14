@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 from .base_page import BasePage
 
 class TransferFundsPage(BasePage):
-    TRANSFER_COMPLETE = (By.XPATH, '//*[@id="showResult"]/h1')
+    TRANSFER_COMPLETE = (By.CSS_SELECTOR, 'div#showResult h1.title')
     AMOUNT_INPUT_FIELD = (By.ID, "amount")
     FROM_ACCOUNT = (By.ID, "fromAccountId")
     TO_ACCOUNT = (By.ID, "toAccountId")

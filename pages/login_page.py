@@ -9,6 +9,7 @@ class LoginPage(BasePage):
     LOGIN_BTN = (By.CSS_SELECTOR, "input.button")
     ERROR = (By.CSS_SELECTOR, ".title")
     REGISTER_LINK = (By.LINK_TEXT, "Register")
+    WELCOME_TEXT = (By.CSS_SELECTOR, 'div#leftPanel p.smallText')
 
     def load(self):
         self.driver.get(self.URL)
@@ -29,8 +30,10 @@ class LoginPage(BasePage):
     def register(self, username, password):
         self.click(self.REGISTER_LINK)
         self.type(self.USERNAME, username)
-        self.type(self.USERNAME, username)
         self.type(self.PASSWORD, password)
 
     def get_error_text(self):
         return self.find(self.ERROR).text.lower()
+
+    def get_welcome_text(self):
+        return self.find(self.WELCOME_TEXT).text.lower()

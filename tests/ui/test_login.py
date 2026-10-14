@@ -6,13 +6,13 @@ def test_valid_login_shared_demo(driver, users):
     login.load()
     creds = users["shared_demo_user"]
     login.login(creds.username, creds.password)
-    assert "overview.htm" in driver.current_url
+    assert creds.username in login.get_welcome_text()
 
 def test_valid_login_dedicated_account(driver):
     login = LoginPage(driver)
     login.load()
     login.login(MY_TEST_USER.username, MY_TEST_USER.password)
-    assert "overview.htm" in driver.current_url
+    assert MY_TEST_USER.username in login.get_welcome_text()
 
 def test_invalid_login_shows_error(driver, users):
     login = LoginPage(driver)

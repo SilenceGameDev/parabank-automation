@@ -2,8 +2,7 @@ from selenium.webdriver.common.by import By
 from .base_page import BasePage
 
 class FindTransactionsPage(BasePage):
-    TRANSACTION_RESULTS_TEXT = (By.XPATH, '//*[@id="resultContainer"]/h1')
-
+    TRANSACTION_RESULTS_TEXT = (By.CSS_SELECTOR, 'div#resultContainer > h1.title')
     ACCOUNT_ID_DROPDOWN = (By.ID, "accountId")
 
     TRANSACTION_ID_FIELD = (By.ID, "transactionId")
@@ -20,9 +19,8 @@ class FindTransactionsPage(BasePage):
         "id":(By.ID, "transactionIdError"),
         "date_range": (By.ID, "dateRangeError"),
         "amount": (By.ID, "amountError"),
-        "nan": (By.XPATH, '//*[@id="transactionBody"]/tr/td[1]')
+        "nan": (By.CSS_SELECTOR, '#transactionTable tbody tr td')
     }
-
 
     def find_by_transaction_id(self, transaction_id:str, account_id_index:int=0):
         self.select_by_index(self.ACCOUNT_ID_DROPDOWN, account_id_index)

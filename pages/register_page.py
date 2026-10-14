@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 from .base_page import BasePage
+from config import MY_TEST_USER
 
 class RegisterPage(BasePage):
     URL = "https://parabank.parasoft.com/parabank/index.htm"
@@ -15,14 +16,12 @@ class RegisterPage(BasePage):
     USERNAME = (By.ID, "customer.username")
     PASSWORD = (By.ID, "customer.password")
     CONFIRM_PASSWORD = (By.ID, "repeatedPassword")
-    REGISTER_BUTTON = (By.XPATH, '//*[@id="customerForm"]/table/tbody/tr[13]/td[2]/input')
-    WELCOME_TEXT = (By.XPATH, '//*[@id="rightPanel"]/h1')
-    USER_EXISTS_ERROR = (By.ID, "customer.username.errors")
+    REGISTER_BUTTON = (By.CSS_SELECTOR, 'input.button[value="Register"]')
 
     def register_user(self,username, password):
         self.driver.get(self.URL)
         self.click(self.REGISTER_LINK)
-        self.type(self.FIRST_NAME,"fname")
+        self.type(self.FIRST_NAME,MY_TEST_USER.username)
         self.type(self.LAST_NAME, "lname")
         self.type(self.ADDRESS, "address")
         self.type(self.CITY, "city")
@@ -34,9 +33,3 @@ class RegisterPage(BasePage):
         self.type(self.PASSWORD, password)
         self.type(self.CONFIRM_PASSWORD, password)
         self.click(self.REGISTER_BUTTON)
-
-    def get_confirmation_text(self):
-        return self.find(self.WELCOME_TEXT).text
-
-    def get_error_text(self):
-        return self.find(self.USER_EXISTS_ERROR).text

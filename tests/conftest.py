@@ -32,6 +32,11 @@ def driver():
     yield drv
     drv.quit()
 
+def make_temp_driver():
+    options = webdriver.ChromeOptions()
+    options.add_argument("--headless=new")
+    return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
 # Used to register an account once a session. Ensure .env is setup with ur account credentials
 # Parabank does an account purge approx every day so having this here instead of re-registering that account manually everyday
 @pytest.fixture(scope="session", autouse=True)
@@ -40,10 +45,7 @@ def setup_test_account():
     ensure_test_account_exists(temp_driver)
     temp_driver.quit()
 
-def make_temp_driver():
-    options = webdriver.ChromeOptions()
-    options.add_argument("--headless=new")
-    return webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
 
 @pytest.fixture(scope="session")
 def known_account_id(setup_test_account):
