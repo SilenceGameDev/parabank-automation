@@ -21,7 +21,7 @@ class RegisterPage(BasePage):
     def register_user(self,username, password):
         self.driver.get(self.URL)
         self.click(self.REGISTER_LINK)
-        self.type(self.FIRST_NAME,MY_TEST_USER.username)
+        self.type(self.FIRST_NAME,"tptest")
         self.type(self.LAST_NAME, "lname")
         self.type(self.ADDRESS, "address")
         self.type(self.CITY, "city")

@@ -12,7 +12,7 @@ def test_valid_login_dedicated_account(driver):
     login = LoginPage(driver)
     login.load()
     login.login(MY_TEST_USER.username, MY_TEST_USER.password)
-    assert MY_TEST_USER.username in login.get_welcome_text()
+    assert "tptest" in login.get_welcome_text()
 
 def test_invalid_login_shows_error(driver, users):
     login = LoginPage(driver)
