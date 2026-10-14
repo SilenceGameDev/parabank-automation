@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 from .base_page import BasePage
-from config import MY_TEST_USER
+from config import TEST_FIRST_NAME, TEST_LAST_NAME
 
 class RegisterPage(BasePage):
     URL = "https://parabank.parasoft.com/parabank/index.htm"
@@ -21,8 +21,8 @@ class RegisterPage(BasePage):
     def register_user(self,username, password):
         self.driver.get(self.URL)
         self.click(self.REGISTER_LINK)
-        self.type(self.FIRST_NAME,"tptest")
-        self.type(self.LAST_NAME, "lname")
+        self.type(self.FIRST_NAME, TEST_FIRST_NAME)
+        self.type(self.LAST_NAME, TEST_LAST_NAME)
         self.type(self.ADDRESS, "address")
         self.type(self.CITY, "city")
         self.type(self.STATE, "state")

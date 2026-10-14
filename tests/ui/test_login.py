@@ -1,5 +1,6 @@
 from pages.login_page import LoginPage
-from config import MY_TEST_USER
+from config import MY_TEST_USER, TEST_FIRST_NAME, TEST_LAST_NAME
+
 
 def test_valid_login_shared_demo(driver, users):
     login = LoginPage(driver)
@@ -12,7 +13,8 @@ def test_valid_login_dedicated_account(driver):
     login = LoginPage(driver)
     login.load()
     login.login(MY_TEST_USER.username, MY_TEST_USER.password)
-    assert "tptest" in login.get_welcome_text()
+    welcome = login.get_welcome_text()
+    assert f"{TEST_FIRST_NAME} {TEST_LAST_NAME}".lower() in welcome.lower()
 
 def test_invalid_login_shows_error(driver, users):
     login = LoginPage(driver)
