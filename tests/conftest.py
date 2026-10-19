@@ -45,8 +45,6 @@ def setup_test_account():
     ensure_test_account_exists(temp_driver)
     temp_driver.quit()
 
-
-
 @pytest.fixture(scope="session")
 def known_account_id(setup_test_account):
     temp_driver = make_temp_driver()
@@ -75,6 +73,17 @@ def known_transaction(known_account_id):
     transaction = generate_known_transaction(temp_driver, known_account_id)
     temp_driver.quit()
     return transaction
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    rep = outcome.get_result()
+    if rep.when in ("setup", "call") and rep.failed:
+        driver = item.funcargs.get("driver")
+        if driver:
+            driver.save_screenshot(f"reports/{item.name}.png")
+            with open(f"reports/{item.name}.html", "w") as f:
+                f.write(driver.page_source)
 
 # test template
 # def test_x(driver, logged_in_accounts_page):

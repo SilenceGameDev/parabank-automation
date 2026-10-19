@@ -11,7 +11,8 @@ def test_get_account_returns_200(known_account_id):
     resp = rest_api.get_account(known_account_id)
     assert resp.status_code == 200
     validated = AccountSchema(**resp.json())
-    assert validated.balance >= 0
+    assert validated.id == int(known_account_id)
+    assert validated.type in ("CHECKING", "SAVINGS")
 
 @pytest.mark.parametrize("invalid_id,expected_status", [
     ("999999999", 400),  # valid format, nonexistent account

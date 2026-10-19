@@ -4,15 +4,21 @@ from selenium.webdriver.support.ui import Select
 from logger import logger
 
 DEFAULT_TIMEOUT_TIME = 10
+PAGE_LOAD_TIMEOUT = 30
 
 class BasePage:
     def __init__(self, driver):
         self.driver = driver
         # times out the webpage after 10s so no need to worry about wait.until() waiting forever in child classes
         self.wait = WebDriverWait(driver, DEFAULT_TIMEOUT_TIME)
+        self.page_timeout = PAGE_LOAD_TIMEOUT
 
-    def find(self, locator):
-        return self.wait.until(EC.visibility_of_element_located(locator))
+    # def find(self, locator):
+    #     return self.wait.until(EC.visibility_of_element_located(locator))
+
+    def find(self, locator, timeout=None):
+        wait = self.wait if timeout is None else WebDriverWait(self.driver, timeout)
+        return wait.until(EC.visibility_of_element_located(locator))
 
     def click(self, locator):
         logger.info(f"Clicking {locator}")

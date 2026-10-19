@@ -13,6 +13,8 @@ class LoginPage(BasePage):
 
     def load(self):
         self.driver.get(self.URL)
+        # Waiting to find username field. Used to fix a race condition
+        self.find(self.USERNAME, self.page_timeout)
 
     def login(self, username, password):
         self.type(self.USERNAME, username)
